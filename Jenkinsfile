@@ -30,6 +30,13 @@ pipeline{
                 }
             }
         }
+        stage('Integration Testing'){
+            steps{
+                script{
+                    mvnIntegrateTest()
+                }
+            }
+        }
         // stage('Code Compile'){
         //     steps{
         //         sh 'mvn clean compile'
