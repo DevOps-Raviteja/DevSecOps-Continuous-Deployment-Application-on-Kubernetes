@@ -67,7 +67,8 @@ pipeline{
             }
             steps{
                 script{
-                    sonarqube()
+                    def sonarCred = 'sonar-api'
+                    sonarqube(sonarCred)
                 }
             }
         }
