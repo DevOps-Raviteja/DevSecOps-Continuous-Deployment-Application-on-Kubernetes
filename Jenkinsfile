@@ -21,11 +21,7 @@ pipeline{
             }
         }
         stage('Git CheckOut'){
-            when {
-                expression {
-                    params.action == 'create'
-                }
-            }
+            when { expression { params.action == 'create' } }
             steps{
                 script{
                     gitCheckout(
@@ -36,11 +32,7 @@ pipeline{
             }
         }
         stage('Unit Testing'){
-            when {
-                expression {
-                    params.action == 'create'
-                }
-            }
+            when { expression { params.action == 'create' } }
             steps{
                 script{
                     mvnTest()
@@ -48,11 +40,7 @@ pipeline{
             }
         }
         stage('Integration Testing'){
-            when {
-                expression {
-                    params.action == 'create'
-                }
-            }
+            when { expression { params.action == 'create' } }
             steps{
                 script{
                     mvnIntegrateTest()
@@ -60,11 +48,7 @@ pipeline{
             }
         }
         stage('SonarQube Analysis'){
-            when {
-                expression {
-                    params.action == 'create'
-                }
-            }
+            when { expression { params.action == 'create' } }
             steps{
                 script{
                     def sonarCred = 'sonar-api'
@@ -73,15 +57,11 @@ pipeline{
             }
         }
         stage('Quality Gate Analysis'){
-            when {
-                expression {
-                    params.action == 'create'
-                }
-            }
+            when { expression { params.action == 'create' } }
             steps{
                 script{
-                    def qualityGateCred = 'sonar-api'
-                    qualityGate(qualityGate)
+                    def sonarCred = 'sonar-api'
+                    qualityGate(sonarCred)
                 }
             }
         }
