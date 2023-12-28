@@ -1,1 +1,1 @@
-# DevSecOps-Continuous-Deployment-Application-on-Kubernetes
+# DevSecOps Continuous Deployment Application on Kubernetes
