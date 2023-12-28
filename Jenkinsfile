@@ -1,13 +1,11 @@
 @Library('Jenkins-shared-library') _
 pipeline{
     agent any 
-    // tools {
-    //     jdk 'JDK'
-    //     maven 'MVN'
-    // }
+    tools {
+        maven 'maven'
+    }
     // environment {
     //     SCANNER_HOME=tool 'sonar-scanner'
-
     // }
     stages{
         stage('Clean WorkSpace'){
