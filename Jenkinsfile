@@ -27,13 +27,13 @@ pipeline{
         stage('Unit Testing'){
             steps{
                 sh 'mvn clean test'
-                junit '**/target/surfire-reports/*.xml'
+                junit '**/target/surefire-reports/*.xml'
             }
         }
         stage('SonarQube Analysis'){
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'sonar-token'){
+                    withSonarQubeEnv(credentialId: 'sonar-token'){
                         sh 'mvn sonar:sonar'
                         sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=petclinic -Dsonar.java.binaries=. -Dsonar.projectKey=petclinic"
                     }
@@ -43,7 +43,7 @@ pipeline{
         stage('SonarQube Quality Gate'){
             steps{
                 script{
-                    waitForQualityGate abortPipeline:false, credentialsId: 'sonar-token'
+                    waitForQualityGate abortPipeline:false, credentialId: 'sonar-token'
                 }
             }
         }
