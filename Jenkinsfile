@@ -10,7 +10,7 @@ pipeline{
     parameters{
         choice(
             name: 'action',
-            choices: 'create\ndelete',
+            choices: 'Create\nDestroy',
             description: 'Chose Create/Destroy'
         )
     }
@@ -23,7 +23,7 @@ pipeline{
         stage('Git CheckOut'){
             when {
                 expression {
-                    params.action == 'create'
+                    params.action == 'Create'
                 }
             }
             steps{
@@ -38,7 +38,7 @@ pipeline{
         stage('Unit Testing'){
             when {
                 expression {
-                    params.action == 'create'
+                    params.action == 'Create'
                 }
             }
             steps{
@@ -50,7 +50,7 @@ pipeline{
         stage('Integration Testing'){
             when {
                 expression {
-                    params.action == 'create'
+                    params.action == 'Create'
                 }
             }
             steps{
@@ -62,7 +62,7 @@ pipeline{
         stage('SonarQube Analysis'){
             when {
                 expression {
-                    params.action == 'create'
+                    params.action == 'Create'
                 }
             }
             steps{
