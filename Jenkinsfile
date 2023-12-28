@@ -72,6 +72,19 @@ pipeline{
                 }
             }
         }
+        stage('Quality Gate Analysis'){
+            when {
+                expression {
+                    params.action == 'create'
+                }
+            }
+            steps{
+                script{
+                    def qualityGateCred = 'sonar-api'
+                    qualityGate(qualityGate)
+                }
+            }
+        }
         
         // stage('Code Compile'){
         //     steps{
