@@ -25,6 +25,13 @@ pipeline{
                 }
             }
         }
+        stage('Unit Testing'){
+            steps{
+                script{
+                    mvnTest()
+                }
+            }
+        }
         // stage('Code Compile'){
         //     steps{
         //         sh 'mvn clean compile'
