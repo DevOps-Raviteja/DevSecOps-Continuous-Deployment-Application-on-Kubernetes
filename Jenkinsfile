@@ -17,7 +17,10 @@ pipeline{
         stage('Git CheckOut'){
             steps{
                 script{
-                    git branch: 'main', url: 'https://github.com/Ravitejadarla5/DevSecOps-Continuous-Deployment-Application-on-Kubernetes.git'
+                    gitCheckout(
+                        branch: 'main',
+                        url: 'https://github.com/Ravitejadarla5/DevSecOps-Continuous-Deployment-Application-on-Kubernetes.git'
+                    )
                 }
             }
         }
