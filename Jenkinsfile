@@ -1,9 +1,9 @@
 @Library('Jenkins-shared-library') _
 pipeline{
     agent any 
-    tools {
-        maven 'maven'
-    }
+    // tools {
+    //     maven 'maven'
+    // }
     // environment {
     //     SCANNER_HOME=tool 'sonar-scanner'
     // }
