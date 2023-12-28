@@ -50,7 +50,7 @@ pipeline{
         stage('Package-Install'){
             steps{
                 sh 'mvn clean install'
-                archiveArtifacts artifacts: 'target/*.war', followSysmlinks: false
+                archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
             }
         }
     }
