@@ -7,7 +7,7 @@ pipeline{
     // environment {
     //     SCANNER_HOME=tool 'sonar-scanner'
     // }
-    parameters{
+    paramseters{
         choice(
             name: 'action',
             choices: 'create\ndelete',
@@ -23,7 +23,7 @@ pipeline{
         stage('Git CheckOut'){
             when {
                 expression {
-                    param.action == 'create'
+                    params.action == 'create'
                 }
             }
             steps{
@@ -38,7 +38,7 @@ pipeline{
         stage('Unit Testing'){
             when {
                 expression {
-                    param.action == 'create'
+                    params.action == 'create'
                 }
             }
             steps{
@@ -50,7 +50,7 @@ pipeline{
         stage('Integration Testing'){
             when {
                 expression {
-                    param.action == 'create'
+                    params.action == 'create'
                 }
             }
             steps{
@@ -62,7 +62,7 @@ pipeline{
         stage('SonarQube Analysis'){
             when {
                 expression {
-                    param.action == 'create'
+                    params.action == 'create'
                 }
             }
             steps{
