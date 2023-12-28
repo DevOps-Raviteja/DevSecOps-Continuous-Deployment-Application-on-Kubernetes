@@ -7,6 +7,13 @@ pipeline{
     // environment {
     //     SCANNER_HOME=tool 'sonar-scanner'
     // }
+    parameters{
+        choice(
+            name: 'action',
+            choices: 'create\ndelete',
+            description: 'Chose Create/Destroy'
+        )
+    }
     stages{
         stage('Clean WorkSpace'){
             steps {
@@ -37,6 +44,14 @@ pipeline{
                 }
             }
         }
+        stage('SonarQube Analysis'){
+            steps{
+                script{
+                    sonarqube()
+                }
+            }
+        }
+        
         // stage('Code Compile'){
         //     steps{
         //         sh 'mvn clean compile'
