@@ -7,7 +7,7 @@ pipeline{
     // environment {
     //     SCANNER_HOME=tool 'sonar-scanner'
     // }
-    paramseters{
+    parameters{
         choice(
             name: 'action',
             choices: 'create\ndelete',
