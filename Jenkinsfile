@@ -31,8 +31,8 @@ pipeline{
                 }
             }
         }
-            when { expression { params.action == 'create' } }
         stage('Unit Testing'){
+            when { expression { params.action == 'create' } }
             steps{
                 script{
                     mvnTest()
