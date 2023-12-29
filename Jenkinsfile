@@ -65,6 +65,15 @@ pipeline{
                 }
             }
         }
+        stage('Maven Build Analysis'){
+            when { expression { params.action == 'create' } }
+            steps{
+                script{
+                    def sonarCred = 'sonar-api'
+                    qualityGate()
+                }
+            }
+        }
         
         // stage('Code Compile'){
         //     steps{
@@ -84,13 +93,6 @@ pipeline{
         //                 sh 'mvn sonar:sonar'
         //                 sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=petclinic -Dsonar.java.binaries=. -Dsonar.projectKey=petclinic"
         //             }
-        //         }
-        //     }
-        // }
-        // stage('SonarQube Quality Gate'){
-        //     steps{
-        //         script{
-        //             waitForQualityGate abortPipeline:false, credentialId: 'sonar-token'
         //         }
         //     }
         // }
