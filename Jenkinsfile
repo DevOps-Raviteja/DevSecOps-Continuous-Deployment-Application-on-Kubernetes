@@ -1,9 +1,6 @@
 @Library('Jenkins-shared-library') _
 pipeline{
-    agent any 
-    // tools {
-    //     maven 'maven'
-    // }
+    agent any
     // environment {
     //     SCANNER_HOME=tool 'sonar-scanner'
     // }
@@ -12,6 +9,21 @@ pipeline{
             name: 'action',
             choices: 'create\ndelete',
             description: 'Chose create/Destroy'
+        )
+        string(
+            name: 'ImageName', 
+            description: 'Name of the Docker Build', 
+            defaultValue: 'javapp'
+        )
+        string(
+            name: 'ImageTag',
+            description: 'Tag of the docker Build', 
+            defaultValue: 'v1'
+        )
+        string(
+            name: 'AppName', 
+            description: 'Name of the Application', 
+            defaultValue: 'springboot'
         )
     }
     stages{
@@ -65,16 +77,33 @@ pipeline{
                 }
             }
         }
-        stage('Maven Build Analysis'){
+        stage('Maven Build'){
             when { expression { params.action == 'create' } }
             steps{
                 script{
-                    def sonarCred = 'sonar-api'
-                    qualityGate(sonarCred)
+                    mvnBuild()
                 }
             }
         }
-        
+        stage('Docker Build'){
+            when { expression { params.action == 'create' } }
+            steps{
+                script{
+                    dockerBuild(
+                        "${ImageName}",
+                        "${ImageTag}",
+                        "${AppName}"
+                    )
+                }
+            }
+        }
+
+
+
+
+
+
+
         // stage('Code Compile'){
         //     steps{
         //         sh 'mvn clean compile'
