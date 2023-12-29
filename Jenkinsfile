@@ -21,9 +21,9 @@ pipeline{
             defaultValue: 'v1'
         )
         string(
-            name: 'AppName', 
+            name: 'DockerHubUser', 
             description: 'Name of the Application', 
-            defaultValue: 'springboot'
+            defaultValue: 'raviteja'
         )
     }
     stages{
@@ -92,7 +92,7 @@ pipeline{
                     dockerBuild(
                         "${params.ImageName}",
                         "${params.ImageTag}",
-                        "${params.AppName}"
+                        "${params.DockerHubUser}"
                     )
                 }
             }
