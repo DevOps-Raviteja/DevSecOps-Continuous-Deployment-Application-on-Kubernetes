@@ -23,7 +23,7 @@ pipeline{
         string(
             name: 'DockerHubUser', 
             description: 'Name of the Application', 
-            defaultValue: 'raviteja'
+            defaultValue: 'ravitejadarla5'
         )
     }
     stages{
@@ -90,6 +90,18 @@ pipeline{
             steps{
                 script{
                     dockerBuild(
+                        "${params.ImageName}",
+                        "${params.ImageTag}",
+                        "${params.DockerHubUser}"
+                    )
+                }
+            }
+        }
+        stage('Docker Image Scan Trivy'){
+            when { expression { params.action == 'create' } }
+            steps{
+                script{
+                    trivyImgScan(
                         "${params.ImageName}",
                         "${params.ImageTag}",
                         "${params.DockerHubUser}"
