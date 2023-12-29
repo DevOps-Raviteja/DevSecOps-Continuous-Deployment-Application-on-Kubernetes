@@ -35,7 +35,7 @@ pipeline{
             when { expression { params.action == 'create' } }
             steps{
                 script{
-                    mvnTest()
+                    mvnTest
                 }
             }
         }
@@ -70,7 +70,7 @@ pipeline{
             steps{
                 script{
                     def sonarCred = 'sonar-api'
-                    qualityGate()
+                    qualityGate(sonarCred)
                 }
             }
         }
