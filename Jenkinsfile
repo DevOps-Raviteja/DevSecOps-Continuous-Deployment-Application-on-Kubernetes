@@ -31,11 +31,11 @@ pipeline{
                 }
             }
         }
-        stage('Unit Testing'){
             when { expression { params.action == 'create' } }
+        stage('Unit Testing'){
             steps{
                 script{
-                    mvnTest
+                    mvnTest()
                 }
             }
         }
