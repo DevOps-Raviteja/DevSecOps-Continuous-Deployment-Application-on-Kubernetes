@@ -90,9 +90,9 @@ pipeline{
             steps{
                 script{
                     dockerBuild(
-                        "${ImageName}",
-                        "${ImageTag}",
-                        "${AppName}"
+                        "${params.ImageName}",
+                        "${params.ImageTag}",
+                        "${params.AppName}"
                     )
                 }
             }
