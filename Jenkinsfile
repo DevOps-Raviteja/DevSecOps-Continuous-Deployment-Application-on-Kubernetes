@@ -1,9 +1,6 @@
 @Library('Jenkins-shared-library') _
 pipeline{
     agent any
-    // environment {
-    //     SCANNER_HOME=tool 'sonar-scanner'
-    // }
     parameters{
         choice(
             name: 'action',
@@ -102,6 +99,18 @@ pipeline{
             steps{
                 script{
                     trivyImgScan(
+                        "${params.ImageName}",
+                        "${params.ImageTag}",
+                        "${params.DockerHubUser}"
+                    )
+                }
+            }
+        }
+        stage('Docker Push'){
+            when { expression { params.action == 'create' } }
+            steps{
+                script{
+                    dockerPush(
                         "${params.ImageName}",
                         "${params.ImageTag}",
                         "${params.DockerHubUser}"
