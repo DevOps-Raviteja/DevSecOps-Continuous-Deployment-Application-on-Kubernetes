@@ -118,51 +118,15 @@ pipeline{
                 }
             }
         }
-        stage('Docker Image Clean-Up'){
+        stage('Deploying'){
             when { expression { params.action == 'create' } }
             steps{
                 script{
-                    dockerImageCleanup(
-                        "${params.ImageName}",
-                        "${params.ImageTag}",
-                        "${params.DockerHubUser}"
-                    )
+                    withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                        sh 'kubectl apply -f deployment.yaml'
+                    }
                 }
             }
         }
-
-
-
-
-
-
-
-        // stage('Code Compile'){
-        //     steps{
-        //         sh 'mvn clean compile'
-        //     }
-        // }
-        // stage('Unit Testing'){
-        //     steps{
-        //         sh 'mvn clean test'
-        //         junit '**/target/surefire-reports/*.xml'
-        //     }
-        // }
-        // stage('SonarQube Analysis'){
-        //     steps{
-        //         script{
-        //             withSonarQubeEnv(credentialId: 'sonar-token'){
-        //                 sh 'mvn sonar:sonar'
-        //                 sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=petclinic -Dsonar.java.binaries=. -Dsonar.projectKey=petclinic"
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Package-Install'){
-        //     steps{
-        //         sh 'mvn clean install'
-        //         archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
-        //     }
-        // }
     }
 }
