@@ -129,4 +129,13 @@ pipeline{
             }
         }
     }
+    post {
+        always {
+            emailext attachLog: true,
+            subject: "'${currentBuild.result}'",
+            body: "Project: ${env.JOB_NAME} <br/>" + "Build Number: ${env.BUILD_NUMBER} <br/>" + "url: ${env.BUILD_URL} <br/>",
+            to: 'ravitejadarla5@gmail.com',
+            attachmentsPattern: 'trivyfs.txt, trivyImage.txt' 
+        }
+    }
 }
